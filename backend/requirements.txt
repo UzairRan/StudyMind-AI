@@ -1,0 +1,28 @@
+# FastAPI
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+pydantic==2.4.2
+pydantic-settings==2.0.3
+
+# CORS
+cors==1.0.1
+
+# RAG Components
+langchain==0.1.16
+langchain-community==0.0.34
+fastembed==0.2.6
+faiss-cpu==1.7.4
+
+# PDF Processing
+pypdf==4.1.0
+pdfplumber==0.10.4
+
+# Google Gemini
+google-generativeai==0.3.2
+
+# Utilities
+python-dotenv==1.0.1
+tqdm==4.66.2
+numpy==1.24.3
+aiofiles==23.2.1 
