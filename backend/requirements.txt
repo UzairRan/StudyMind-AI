@@ -8,8 +8,8 @@ pydantic-settings==2.5.0
 # RAG Components
 langchain==0.3.0
 langchain-community==0.3.0
-fastembed==0.5.1  # ← Updated version
-faiss-cpu==1.8.0
+fastembed==0.5.1
+faiss-cpu>=1.8.0  # ← Changed to work with available versions
 
 # PDF Processing
 pypdf==5.1.0
@@ -22,4 +22,4 @@ google-generativeai==0.8.3
 python-dotenv==1.0.1
 tqdm==4.66.5
 numpy==1.26.4
-aiofiles==24.1.0 
+aiofiles==24.1.0
