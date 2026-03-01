@@ -2,17 +2,17 @@ services:
   - type: web
     name: studymind-api
     runtime: python
-    repo: https://github.com/yourusername/StudyMind-AI
+    repo: https://github.com/UzairRan/StudyMind-AI
     branch: main
     buildCommand: |
       pip install --upgrade pip
-      pip install -r requirements.txt
+      pip install -r requirements.txt 
     startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: GEMINI_API_KEY
         sync: false
       - key: ENVIRONMENT
-        value: production
+        value: production 
       - key: ALLOWED_ORIGINS
         value: https://your-frontend.vercel.app
     healthCheckPath: /health
