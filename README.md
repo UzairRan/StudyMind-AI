@@ -229,49 +229,51 @@ streamlit run app.py
 flowchart TD
     A[Data Ingestion]:::ingest --> B[Data Preprocessing]:::preprocess
     B --> C[Feature Engineering]:::feature
-    C --> D[Model Training / Setup]:::train
-    D --> E[Model Evaluation / Retrieval]:::evaluate
+    C --> D[Model Training Setup]:::train
+    D --> E[Model Evaluation Retrieval]:::evaluate
     E --> F[Deployment]:::deploy
-    F --> G[Monitoring & Optimization]:::monitor
+    F --> G[Monitoring Optimization]:::monitor
 
-    classDef ingest fill:#ffdfba,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
-    classDef preprocess fill:#ffd6d6,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
-    classDef feature fill:#caffbf,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
-    classDef train fill:#9bf6ff,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
-    classDef evaluate fill:#bdb2ff,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
-    classDef deploy fill:#ffc6ff,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
-    classDef monitor fill:#ffffba,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
+    %% Detailed steps
+    A --> A1[Upload PDFs and Extract Text]
+    A --> A2[Clean and Structure Data]
+    A --> A3[Preserve Metadata]
 
-    %% Detailed steps as subnotes
-    A --> A1[Upload PDFs & extract text]
-    A --> A2[Clean & structure data]
-    A --> A3[Preserve metadata]
+    B --> B1[Chunk Text with Overlap]
+    B --> B2[Filter and Clean Context]
 
-    B --> B1[Chunk text with overlap]
-    B --> B2[Filter & clean context]
+    C --> C1[Generate Embeddings - Sentence Transformers]
+    C --> C2[Store in FAISS Vector DB]
+    C --> C3[Tag Metadata for Retrieval]
 
-    C --> C1[Generate embeddings (Sentence-Transformers)]
-    C --> C2[Store in FAISS vector DB]
-    C --> C3[Tag metadata for retrieval]
-
-    D --> D1[Local LLM: Ollama]
-    D --> D2[Cloud fallback: Tiny Models]
+    D --> D1[Local LLM Ollama]
+    D --> D2[Cloud Fallback Tiny Models]
     
-    E --> E1[Retrieve relevant chunks]
-    E --> E2[Evaluate answer quality]
-    E --> E3[Quiz generation]
+    E --> E1[Retrieve Relevant Chunks]
+    E --> E2[Evaluate Answer Quality]
+    E --> E3[Quiz Generation]
 
-    F --> F1[Local PC: Full RAG system]
-    F --> F2[Streamlit Cloud: Tiny Models]
-    F --> F3[Streamlit UI workflow]
+    F --> F1[Local PC Full RAG System]
+    F --> F2[Streamlit Cloud Tiny Models]
+    F --> F3[Streamlit UI Workflow]
 
-    G --> G1[Parallel processing for speed]
-    G --> G2[Memory-efficient caching]
-    G --> G3[Fallback & error handling]
+    G --> G1[Parallel Processing for Speed]
+    G --> G2[Memory Efficient Caching]
+    G --> G3[Fallback and Error Handling]
+
+    %% Styles
+    classDef ingest fill:#ffbf91,stroke:#000,stroke-width:2px,color:#000;
+    classDef preprocess fill:#ffdc91,stroke:#000,stroke-width:2px,color:#000;
+    classDef feature fill:#b2f7ef,stroke:#000,stroke-width:2px,color:#000;
+    classDef train fill:#91d0ff,stroke:#000,stroke-width:2px,color:#000;
+    classDef evaluate fill:#c791ff,stroke:#000,stroke-width:2px,color:#000;
+    classDef deploy fill:#ff91c1,stroke:#000,stroke-width:2px,color:#000;
+    classDef monitor fill:#fff591,stroke:#000,stroke-width:2px,color:#000;
 ```
 
 ---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
+
 
 
 
