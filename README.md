@@ -29,25 +29,22 @@
 # Flow Diagram 1  Full System
 
 ```mermaid
-flowchart LR
-    A[PDF Upload]:::a --> B[Text Extraction]:::b
-    B --> C[Chunking]:::c
-    C --> D[Embeddings<br>Sentence-Transformers]:::d
-    D --> E[FAISS Index]:::e
-    E --> F[Retriever]:::f
-    F --> G[Local / Cloud Model]:::g
-    G --> H[Answer to User]:::h
+flowchart TB
+    A[PDF Upload]:::node --> B[Text Extraction]:::node
+    B --> C[Chunking]:::node
+    C --> D[Embeddings<br>Sentence-Transformers]:::node
+    D --> E[FAISS Index]:::node
+    E --> F[Retriever]:::node
+    F --> G[Local / Cloud Model]:::node
+    G --> H[Answer to User]:::node
 
-    classDef a fill:#ffabab,stroke:#000;
-    classDef b fill:#ffd6a5,stroke:#000;
-    classDef c fill:#fdffb6,stroke:#000;
-    classDef d fill:#caffbf,stroke:#000;
-    classDef e fill:#9bf6ff,stroke:#000;
-    classDef f fill:#a0c4ff,stroke:#000;
-    classDef g fill:#bdb2ff,stroke:#000;
-    classDef h fill:#ffc6ff,stroke:#000;
+    %% Larger and cleaner style
+    classDef node fill:#e8f1ff,stroke:#000,stroke-width:2px,
+        color:#000,font-size:18px,padding:18px;
 ```
 
 
+
 ----------------------------------------------------
+
 
