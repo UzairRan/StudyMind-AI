@@ -28,6 +28,7 @@
 
 # Flow Diagram 1  Full System
 
+
 ```mermaid
 flowchart TB
     A[PDF Upload]:::node --> B[Text Extraction]:::node
@@ -38,13 +39,11 @@ flowchart TB
     F --> G[Local / Cloud Model]:::node
     G --> H[Answer to User]:::node
 
-    %% Larger and cleaner style
-    classDef node fill:#e8f1ff,stroke:#000,stroke-width:2px,
-        color:#000,font-size:18px,padding:18px;
+    classDef node fill:#e8f1ff,stroke:#000,stroke-width:2px,color:#000,font-size:18px,padding:18px;
 ```
 
 
-
 ----------------------------------------------------
+
 
 
