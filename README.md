@@ -141,8 +141,7 @@ flowchart TB
     D --> F[Final Answer]:::node
     E --> F[Final Answer]:::node
 
-    classDef node fill:#e8f1ff,stroke:#000,stroke-width:2px,color:#000,font-size:16px,padding:12px;
-'''
+    classDef node fill:#e8f1ff,stroke:#000,stroke-width:2px,color:#000,font-size:16px,padding:12px;'''
 
 ---------------------------------------------------------
 
@@ -222,59 +221,6 @@ streamlit run app.py
 
 --------------------------------------------------------
 --------------------------------------------------------
-
-# AI and ML Flow
-
-
-```mermaid
-flowchart TD
-    A[Data Ingestion]:::ingest --> B[Data Preprocessing]:::preprocess
-    B --> C[Feature Engineering]:::feature
-    C --> D[Model Training / Setup]:::train
-    D --> E[Model Evaluation / Retrieval]:::eval
-    E --> F[Deployment]:::deploy
-    F --> G[Monitoring & Optimization]:::monitor
-
-    %% Details inside each stage
-    A --> A1[Upload PDFs & Extract Text (pypdf + pdfplumber)]
-    A --> A2[Clean & Structure Raw Data]
-    A --> A3[Metadata Preservation (chapter, page numbers)]
-
-    B --> B1[Text Chunking with Overlap (LangChain)]
-    B --> B2[Clean / Filter for Meaningful Context]
-
-    C --> C1[Generate Embeddings (Sentence-Transformers)]
-    C --> C2[Store Embeddings in FAISS]
-    C --> C3[Metadata Tagging for Retrieval]
-
-    D --> D1[Local LLM: Ollama]
-    D --> D2[Cloud Fallback: Tiny Models (Phi-1.5)]
-    D --> D3[No Explicit Training Required]
-
-    E --> E1[Retrieve Relevant Chunks via Vector Search]
-    E --> E2[Evaluate Answers from LLM]
-    E --> E3[Quiz Generation for Testing]
-
-    F --> F1[Local PC: Full RAG System]
-    F --> F2[Streamlit Cloud: Tiny Models & Optimized]
-    F --> F3[Streamlit UI with Multi-Page Workflow]
-
-    G --> G1[Parallel Processing for Speed]
-    G --> G2[Memory-Efficient Embedding Caching]
-    G --> G3[Fallback Mechanisms if Local LLM Unavailable]
-    G --> G4[Error Handling & User-Friendly Messages]
-
-    %% Coloring
-    classDef ingest fill:#ffcccc,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef preprocess fill:#ffe0b3,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef feature fill:#ffff99,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef train fill:#ccffcc,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef eval fill:#99ccff,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef deploy fill:#d9b3ff,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef monitor fill:#ffb3b3,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-'''
-
-
 
 
 
