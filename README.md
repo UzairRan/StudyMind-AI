@@ -1,4 +1,13 @@
-<p align="left"> <img src="https://img.shields.io/badge/Streamlit-App-blue?style=for-the-badge" /> <img src="https://img.shields.io/badge/Python-3.10+-yellow?style=for-the-badge" /> <img src="https://img.shields.io/badge/RAG-Enabled-green?style=for-the-badge" /> <img src="https://img.shields.io/badge/FAISS-VectorDB-orange?style=for-the-badge" /> <img src="https://img.shields.io/badge/SentenceTransformers-Embeddings-red?style=for-the-badge" /> <img src="https://img.shields.io/badge/Ollama-LocalLLM-purple?style=for-the-badge" /> <img src="https://img.shields.io/badge/Transformers-TinyModels-lightgrey?style=for-the-badge" /> <img src="https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge" /> </p>
+<p align="left"> 
+  <img src="https://img.shields.io/badge/Streamlit-App-blue?style=for-the-badge" /> 
+  <img src="https://img.shields.io/badge/Python-3.10+-yellow?style=for-the-badge" /> 
+  <img src="https://img.shields.io/badge/RAG-Enabled-green?style=for-the-badge" /> 
+  <img src="https://img.shields.io/badge/FAISS-VectorDB-orange?style=for-the-badge" /> 
+  <img src="https://img.shields.io/badge/SentenceTransformers-Embeddings-red?style=for-the-badge" /> 
+  <img src="https://img.shields.io/badge/Ollama-LocalLLM-purple?style=for-the-badge" /> 
+  <img src="https://img.shields.io/badge/Transformers-TinyModels-lightgrey?style=for-the-badge" /> 
+  <img src="https://img.shields.io/badge/PromptEngineering-pink?style=for-the-badge" /> 
+</p>
 
 # StudyMind AI
 
@@ -261,18 +270,19 @@ flowchart TD
     G --> G2[Memory Efficient Caching]
     G --> G3[Fallback and Error Handling]
 
-    %% Styles
-    classDef ingest fill:#ffbf91,stroke:#000,stroke-width:2px,color:#000;
-    classDef preprocess fill:#ffdc91,stroke:#000,stroke-width:2px,color:#000;
-    classDef feature fill:#b2f7ef,stroke:#000,stroke-width:2px,color:#000;
-    classDef train fill:#91d0ff,stroke:#000,stroke-width:2px,color:#000;
-    classDef evaluate fill:#c791ff,stroke:#000,stroke-width:2px,color:#000;
-    classDef deploy fill:#ff91c1,stroke:#000,stroke-width:2px,color:#000;
-    classDef monitor fill:#fff591,stroke:#000,stroke-width:2px,color:#000;
+    %% Styles - bold and high contrast
+    classDef ingest fill:#ff8c42,stroke:#000,stroke-width:4px,color:#000,rx:8,ry:8;
+    classDef preprocess fill:#ffd166,stroke:#000,stroke-width:4px,color:#000,rx:8,ry:8;
+    classDef feature fill:#06d6a0,stroke:#000,stroke-width:4px,color:#000,rx:8,ry:8;
+    classDef train fill:#118ab2,stroke:#000,stroke-width:4px,color:#fff,rx:8,ry:8;
+    classDef evaluate fill:#9d4edd,stroke:#000,stroke-width:4px,color:#fff,rx:8,ry:8;
+    classDef deploy fill:#ef476f,stroke:#000,stroke-width:4px,color:#fff,rx:8,ry:8;
+    classDef monitor fill:#ffd166,stroke:#000,stroke-width:4px,color:#000,rx:8,ry:8;
 ```
 
 ---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
+
 
 
 
