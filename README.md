@@ -132,7 +132,7 @@ flowchart TB
 
 # Flow Diagram: Local vs Cloud Path
 
-'''mermaid
+```mermaid
 flowchart TB
     A[User Question]:::node --> B[Retrieve Context]:::node
     B --> C{Running Environment?}:::node
@@ -142,7 +142,8 @@ flowchart TB
     E --> F[Final Answer]:::node
 
     classDef node fill:#e8f1ff,stroke:#000,stroke-width:2px,color:#000;
-'''
+```
+
 ---------------------------------------------------------
 
 # Installation Instructions
@@ -224,53 +225,53 @@ streamlit run app.py
 
 # AI and ML Cycle
 
-'''mermaid
+```mermaid
 flowchart TD
     A[Data Ingestion]:::ingest --> B[Data Preprocessing]:::preprocess
     B --> C[Feature Engineering]:::feature
     C --> D[Model Training / Setup]:::train
-    D --> E[Model Evaluation / Retrieval]:::eval
+    D --> E[Model Evaluation / Retrieval]:::evaluate
     E --> F[Deployment]:::deploy
     F --> G[Monitoring & Optimization]:::monitor
 
-    %% Details inside each stage
-    A --> A1[Upload PDFs & Extract Text (pypdf + pdfplumber)]
-    A --> A2[Clean & Structure Raw Data]
-    A --> A3[Metadata Preservation (chapter, page numbers)]
+    classDef ingest fill:#ffdfba,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
+    classDef preprocess fill:#ffd6d6,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
+    classDef feature fill:#caffbf,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
+    classDef train fill:#9bf6ff,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
+    classDef evaluate fill:#bdb2ff,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
+    classDef deploy fill:#ffc6ff,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
+    classDef monitor fill:#ffffba,stroke:#333,stroke-width:2px,color:#000,font-size:16px,padding:10px;
 
-    B --> B1[Text Chunking with Overlap (LangChain)]
-    B --> B2[Clean / Filter for Meaningful Context]
+    %% Detailed steps as subnotes
+    A --> A1[Upload PDFs & extract text]
+    A --> A2[Clean & structure data]
+    A --> A3[Preserve metadata]
 
-    C --> C1[Generate Embeddings (Sentence-Transformers)]
-    C --> C2[Store Embeddings in FAISS]
-    C --> C3[Metadata Tagging for Retrieval]
+    B --> B1[Chunk text with overlap]
+    B --> B2[Filter & clean context]
+
+    C --> C1[Generate embeddings (Sentence-Transformers)]
+    C --> C2[Store in FAISS vector DB]
+    C --> C3[Tag metadata for retrieval]
 
     D --> D1[Local LLM: Ollama]
-    D --> D2[Cloud Fallback: Tiny Models (Phi-1.5)]
-    D --> D3[No Explicit Training Required]
+    D --> D2[Cloud fallback: Tiny Models]
+    
+    E --> E1[Retrieve relevant chunks]
+    E --> E2[Evaluate answer quality]
+    E --> E3[Quiz generation]
 
-    E --> E1[Retrieve Relevant Chunks via Vector Search]
-    E --> E2[Evaluate Answers from LLM]
-    E --> E3[Quiz Generation for Testing]
+    F --> F1[Local PC: Full RAG system]
+    F --> F2[Streamlit Cloud: Tiny Models]
+    F --> F3[Streamlit UI workflow]
 
-    F --> F1[Local PC: Full RAG System]
-    F --> F2[Streamlit Cloud: Tiny Models & Optimized]
-    F --> F3[Streamlit UI with Multi-Page Workflow]
+    G --> G1[Parallel processing for speed]
+    G --> G2[Memory-efficient caching]
+    G --> G3[Fallback & error handling]
+```
 
-    G --> G1[Parallel Processing for Speed]
-    G --> G2[Memory-Efficient Embedding Caching]
-    G --> G3[Fallback Mechanisms if Local LLM Unavailable]
-    G --> G4[Error Handling & User-Friendly Messages]
-
-    %% Coloring
-    classDef ingest fill:#ffcccc,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef preprocess fill:#ffe0b3,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef feature fill:#ffff99,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef train fill:#ccffcc,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef eval fill:#99ccff,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef deploy fill:#d9b3ff,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-    classDef monitor fill:#ffb3b3,stroke:#000,stroke-width:1px,color:#000,font-size:16px,padding:6px;
-'''
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
 
 
 
