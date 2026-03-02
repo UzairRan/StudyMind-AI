@@ -161,7 +161,7 @@ flowchart TB
 
 - Clone the repository
 
-git clone https://github.com/yourusername/StudyMind-AI.git
+git clone https://github.com/UzairRan/StudyMind-AI.git 
 
 cd StudyMind-AI
 
@@ -199,7 +199,7 @@ streamlit run app.py
 
 - Clone the repository
 
-git clone https://github.com/yourusername/StudyMind-AI.git
+git clone https://github.com/UzairRan/StudyMind-AI.git 
 
 cd StudyMind-AI
 
@@ -282,6 +282,7 @@ flowchart TD
 
 ---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
+
 
 
 
