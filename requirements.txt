@@ -1,26 +1,27 @@
-# Core
+# Core - Pin exact versions to prevent auto-upgrades
 streamlit==1.32.0
 langchain==0.1.0
 langchain-community==0.0.10
 
-# Embeddings - sentence-transformers ONLY
+# Embeddings - sentence-transformers with compatible versions
 sentence-transformers==2.2.2
 faiss-cpu==1.7.4
-# huggingface-hub==0.20.3  # ← ADD THIS LINE (missing dependency) 
-huggingface-hub==0.16.4  # ← CHANGED - older version that has cached_download 
+huggingface-hub==0.16.4
+transformers==4.36.0
+torch==2.1.0
+accelerate==0.26.0
+tokenizers==0.15.0
+safetensors==0.4.0
 
 # PDF Processing
 pypdf==4.1.0
 pdfplumber==0.10.4
-
-# For tiny models
-transformers==4.36.0
-torch==2.1.0
-accelerate==0.26.0
 
 # Utilities
 python-dotenv==1.0.0
 tqdm==4.66.1
 numpy==1.24.3
 pandas==2.0.3
-plotly==5.18.0 
+plotly==5.18.0
+requests==2.31.0
+pillow==10.1.0 
