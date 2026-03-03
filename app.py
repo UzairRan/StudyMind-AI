@@ -279,7 +279,7 @@ with header_col2:
 with st.sidebar:
     # Mode badge with model info
     if IN_STREAMLIT_CLOUD:
-        st.markdown('<div class="mode-badge">☁️ Cloud Mode (Phi-1.5)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="mode-badge">☁️ Cloud Mode  (GPT-2)</div>', unsafe_allow_html=True)
     else:
         st.markdown('<div class="mode-badge">💻 Local Mode (Llama 3.2)</div>', unsafe_allow_html=True)
     
@@ -376,11 +376,13 @@ with st.sidebar:
             st.rerun()
     
     # Model info
-    if hasattr(st.session_state.llm, 'model_name'):
-        with st.expander("Model Info", expanded=False):
-            model_display = "Cloud (Phi-1.5)" if IN_STREAMLIT_CLOUD else f"Local ({st.session_state.llm.model_name})"
-            st.info(f"**Model:** {model_display}")
-
+    # Model info
+    # Model info
+if hasattr(st.session_state.llm, 'model_name'):
+    with st.expander("Model Info", expanded=False):
+        model_display = "Cloud (Phi-1.5)" if IN_STREAMLIT_CLOUD else f"Local ({st.session_state.llm.model_name})"
+        st.info(f"**Model:** {model_display}") 
+        
 # Main content area
 if not st.session_state.processed:
     # Welcome screen - Step cards directly below header
