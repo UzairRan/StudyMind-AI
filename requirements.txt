@@ -28,7 +28,7 @@ transformers==4.36.0
 torch==2.1.0
 accelerate==0.26.0
 huggingface-hub==0.20.3
-tokenizers==0.15.0
+tokenizers==0.15.1  # CHANGED from 0.15.0 to 0.15.1
 safetensors==0.4.0
 
 # PDF Processing
@@ -38,5 +38,4 @@ pdfplumber==0.10.4
 # Utilities
 python-dotenv==1.0.0
 tqdm==4.66.1
-# numpy==1.24.3 
-numpy>=1.26.0
+numpy>=1.26.0 
