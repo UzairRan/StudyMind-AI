@@ -52,7 +52,7 @@ if IN_STREAMLIT_CLOUD:
     from modules.embeddings_light import EmbeddingManagerLight as EmbeddingManager
     print("✅ Using lightweight fastembed for cloud")
 else:
-    from modules.embeddings import EmbeddingManager
+    from modules.embeddings_local import EmbeddingManager  # Updated name 
     print("✅ Using sentence-transformers for local")
 
 from modules.retriever import Retriever
