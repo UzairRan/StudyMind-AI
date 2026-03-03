@@ -61,9 +61,9 @@ from modules.quiz_generator import QuizGenerator
 # Import appropriate LLM based on environment
 if IN_STREAMLIT_CLOUD:
     from modules.tiny_llm import TinyLLM as LLM
-    DEFAULT_MODEL = "Phi-1.5 (1.3B)"
+    DEFAULT_MODEL = "GPT-2 (124M)"  # ← Change from Phi-1.5 to GPT-2
     os.environ["USE_CLOUD_MODE"] = "true"
-    print("✅ Using TinyLLM (Phi-1.5) for cloud")
+    print("✅ Using TinyLLM (GPT-2) for cloud") 
 else:
     try:
         from modules.local_llm import LocalLLM as LLM

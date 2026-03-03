@@ -1,6 +1,6 @@
 """
 Tiny LLM Module
-Uses small models that run on Streamlit Cloud (under 512MB)
+Uses ultra-small models that run on Streamlit Cloud (under 512MB)
 """
 
 from transformers import pipeline, AutoModelForCausalLM, AutoTokenizer
@@ -9,21 +9,21 @@ from typing import List, Optional
 import streamlit as st
 
 class TinyLLM:
-    def __init__(self, model_name: str = "microsoft/phi-1_5"):
+    def __init__(self, model_name: str = "gpt2"):
         """
         Initialize tiny model for cloud deployment
         
         Args:
-            model_name: HuggingFace model name (must be small)
+            model_name: HuggingFace model name (must be VERY small for 512MB)
         """
         self.model_name = model_name
         
-        # Available tiny models (all under 2GB, run on CPU)
+        # Ultra-small models (ALL under 512MB)
         self.available_models = {
-            "Phi-1.5 (1.3B)": "microsoft/phi-1_5",
-            "TinyLlama (1.1B)": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
-            "GPT-2 (124M)": "gpt2",
-            "OPT-125M": "facebook/opt-125m",
+            "GPT-2 (124M)": "gpt2",                          # 500MB - RECOMMENDED
+            "DistilGPT-2 (82M)": "distilgpt2",               # 350MB
+            "OPT-125M": "facebook/opt-125m",                 # 250MB
+            "TinyBERT (14M)": "huawei-noah/TinyBERT_4L_312D", # 50MB
         }
         
         self.model = None
@@ -38,6 +38,11 @@ class TinyLLM:
         try:
             with st.spinner(f"Loading {self.model_name}... (first time only)"):
                 self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+                
+                # Add padding token for GPT-2
+                if self.tokenizer.pad_token is None:
+                    self.tokenizer.pad_token = self.tokenizer.eos_token
+                
                 self.model = AutoModelForCausalLM.from_pretrained(
                     self.model_name,
                     torch_dtype=torch.float32,
@@ -48,9 +53,10 @@ class TinyLLM:
                     "text-generation",
                     model=self.model,
                     tokenizer=self.tokenizer,
-                    max_new_tokens=200,
+                    max_new_tokens=100,
                     temperature=0.7,
-                    do_sample=True
+                    do_sample=True,
+                    pad_token_id=self.tokenizer.eos_token_id
                 )
         except Exception as e:
             st.error(f"Failed to load model: {e}")
@@ -70,21 +76,26 @@ class TinyLLM:
             return "Model not loaded. Please try again."
         
         try:
-            # Build prompt
+            # Build prompt - simpler for small models
             if context:
-                context_text = "\n".join(context[:3])  # Limit context for tiny models
-                full_prompt = f"""Context: {context_text}
-
-Question: {prompt}
-
-Answer:"""
+                context_text = "\n".join(context[:2])  # Limit context
+                full_prompt = f"Context: {context_text}\n\nQuestion: {prompt}\n\nAnswer:"
             else:
-                full_prompt = prompt
+                full_prompt = f"Question: {prompt}\n\nAnswer:"
             
             # Generate
-            result = self.pipeline(full_prompt, max_new_tokens=150, num_return_sequences=1)
+            result = self.pipeline(
+                full_prompt, 
+                max_new_tokens=100, 
+                num_return_sequences=1,
+                pad_token_id=self.tokenizer.eos_token_id
+            )
             
-            return result[0]['generated_text'].replace(full_prompt, "").strip()
+            # Extract just the answer part
+            generated = result[0]['generated_text']
+            if "Answer:" in generated:
+                return generated.split("Answer:")[-1].strip()
+            return generated.strip()
             
         except Exception as e:
             return f"Error: {str(e)}"
@@ -104,15 +115,16 @@ Answer:"""
             return "Model not loaded"
         
         try:
-            context_text = "\n".join(context[:2])
+            context_text = "\n".join(context[:1])  # Even less context
             
-            prompt = f"""Based on this text, create {num_questions} questions:
-
-{context_text}
-
-Questions:"""
+            prompt = f"Based on: {context_text}\n\nCreate {num_questions} questions:"
             
-            result = self.pipeline(prompt, max_new_tokens=300, num_return_sequences=1)
+            result = self.pipeline(
+                prompt, 
+                max_new_tokens=200, 
+                num_return_sequences=1,
+                pad_token_id=self.tokenizer.eos_token_id
+            )
             
             return result[0]['generated_text'].replace(prompt, "").strip()
             
