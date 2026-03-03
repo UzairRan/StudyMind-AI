@@ -10,7 +10,7 @@ from typing import List, Dict, Any
 from fastembed import TextEmbedding
 import faiss
 
-class EmbeddingManagerLight:
+class EmbeddingManager:
     def __init__(self, model_name: str = "BAAI/bge-small-en-v1.5"):
         """
         Initialize with fastembed (much lighter than sentence-transformers)

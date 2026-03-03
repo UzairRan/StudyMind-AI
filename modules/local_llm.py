@@ -9,7 +9,8 @@ import requests
 from typing import List, Optional
 import streamlit as st
 
-class LocalLLM:
+
+class LocalLLM:  # ← CHANGED FROM LOCALLLM to LocalLLM
     def __init__(self, model_name: str = "llama3.2:3b"):
         """
         Initialize local LLM via Ollama

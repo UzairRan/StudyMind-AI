@@ -25,23 +25,23 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # ============================================================================
 # DEFINE ENVIRONMENT DETECTION FIRST (BEFORE MODULE IMPORTS)
 # ============================================================================
+
 import sys
 IN_STREAMLIT_CLOUD = False
 
 # Multiple detection methods for Streamlit Cloud
-if os.path.exists("/.dockerenv"):
+# Only set to True if DEFINITELY in cloud environment
+if os.path.exists("/.dockerenv") and "STREAMLIT_SERVER" in os.environ:
     IN_STREAMLIT_CLOUD = True
 elif "STREAMLIT_SHARING" in os.environ:
     IN_STREAMLIT_CLOUD = True
 elif "STREAMLIT_RUNTIME" in os.environ:
     IN_STREAMLIT_CLOUD = True
-elif os.path.exists("/mount/src"):
+elif os.path.exists("/mount/src") and "STREAMLIT_SERVER" in os.environ:
     IN_STREAMLIT_CLOUD = True
-elif "REPLIT" in os.environ:
-    IN_STREAMLIT_CLOUD = True
-elif os.getenv("STREAMLIT_SERVER_PORT"):
-    IN_STREAMLIT_CLOUD = True
-
+elif os.getenv("STREAMLIT_SERVER_PORT") and os.getenv("IS_STREAMLIT_CLOUD"):
+    IN_STREAMLIT_CLOUD = True 
+    
 # ============================================================================
 # NOW IMPORT MODULES (after environment detection)
 # ============================================================================
