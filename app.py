@@ -27,19 +27,37 @@ from modules.embeddings import EmbeddingManager
 from modules.retriever import Retriever
 from modules.quiz_generator import QuizGenerator
 
-# Detect environment (local vs cloud)
+# ============================================================================
+# ENVIRONMENT DETECTION - IMPROVED FOR STREAMLIT CLOUD
+# ============================================================================
 import sys
-IN_STREAMLIT_CLOUD = os.path.exists("/.dockerenv") or "STREAMLIT_SHARING" in os.environ
+IN_STREAMLIT_CLOUD = False
+
+# Multiple detection methods for Streamlit Cloud
+if os.path.exists("/.dockerenv"):
+    IN_STREAMLIT_CLOUD = True
+elif "STREAMLIT_SHARING" in os.environ:
+    IN_STREAMLIT_CLOUD = True
+elif "STREAMLIT_RUNTIME" in os.environ:
+    IN_STREAMLIT_CLOUD = True
+elif os.path.exists("/mount/src"):
+    IN_STREAMLIT_CLOUD = True
+elif "REPLIT" in os.environ:
+    IN_STREAMLIT_CLOUD = True
+elif os.getenv("STREAMLIT_SERVER_PORT"):
+    IN_STREAMLIT_CLOUD = True
 
 # Import appropriate LLM based on environment
 if IN_STREAMLIT_CLOUD:
     from modules.tiny_llm import TinyLLM as LLM
     DEFAULT_MODEL = "Phi-1.5 (1.3B)"
+    # Force TinyLLM even if Ollama is imported
+    os.environ["USE_CLOUD_MODE"] = "true"
 else:
     try:
         from modules.local_llm import LocalLLM as LLM
         DEFAULT_MODEL = "llama3.2:3b"
-    except:
+    except ImportError:
         from modules.tiny_llm import TinyLLM as LLM
         DEFAULT_MODEL = "Phi-1.5 (1.3B)"
 
@@ -223,7 +241,7 @@ if st.session_state.llm is None:
         st.session_state.quiz_generator = QuizGenerator()
 
 # ============================================================================
-# MAIN HEADER WITH LOGO AND TITLE - Now with logo larger than title
+# MAIN HEADER WITH LOGO AND TITLE
 # ============================================================================
 
 # Create a single row for header
@@ -244,11 +262,11 @@ with header_col2:
 
 # Sidebar
 with st.sidebar:
-    # Mode badge
+    # Mode badge with model info
     if IN_STREAMLIT_CLOUD:
-        st.markdown('<div class="mode-badge">Cloud Mode</div>', unsafe_allow_html=True)
+        st.markdown('<div class="mode-badge">☁️ Cloud Mode (Phi-1.5)</div>', unsafe_allow_html=True)
     else:
-        st.markdown('<div class="mode-badge">Local Mode</div>', unsafe_allow_html=True)
+        st.markdown('<div class="mode-badge">💻 Local Mode (Llama 3.2)</div>', unsafe_allow_html=True)
     
     # File upload section - no extra line
     st.markdown("### Upload Notes")
@@ -345,7 +363,8 @@ with st.sidebar:
     # Model info
     if hasattr(st.session_state.llm, 'model_name'):
         with st.expander("Model Info", expanded=False):
-            st.info(f"**Model:** {st.session_state.llm.model_name}")
+            model_display = "Cloud (Phi-1.5)" if IN_STREAMLIT_CLOUD else f"Local ({st.session_state.llm.model_name})"
+            st.info(f"**Model:** {model_display}")
 
 # Main content area
 if not st.session_state.processed:
@@ -394,7 +413,7 @@ if not st.session_state.processed:
         """, unsafe_allow_html=True)
 
 else:
-    # Main tabs (3 tabs now - Flashcards removed)
+    # Main tabs (3 tabs)
     tab1, tab2, tab3 = st.tabs([
         "Chat with Notes", 
         "Generate Quiz", 
