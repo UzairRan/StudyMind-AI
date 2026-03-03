@@ -1,0 +1,52 @@
+
+---
+
+### **File 11: `.gitignore`**
+```gitignore
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Vector stores
+vector_store/*
+!vector_store/.gitkeep
+
+# Uploads
+temp_uploads/*
+!temp_uploads/.gitkeep
+
+# Models cache
+models_cache/
+*.bin
+*.pt
+*.pth
+
+# Environment
+.env
+.env.local
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log 
