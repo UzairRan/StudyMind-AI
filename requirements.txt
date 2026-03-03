@@ -19,7 +19,8 @@ langchain-community==0.0.10
 # Lightweight Embeddings (fastembed uses ONNX, much smaller memory)
 fastembed==0.2.6
 faiss-cpu==1.7.4
-onnxruntime==1.16.3
+# onnxruntime==1.16.3
+onnxruntime==1.17.0  # Changed from 1.16.3 to 1.17.0 
 
 # Tiny LLM for Cloud
 transformers==4.36.0
