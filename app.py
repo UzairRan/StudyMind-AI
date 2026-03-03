@@ -71,7 +71,7 @@ else:
         print("✅ Using LocalLLM (Llama 3.2) for local")
     except ImportError:
         from modules.tiny_llm import TinyLLM as LLM
-        DEFAULT_MODEL = "Phi-1.5 (1.3B)"
+        DEFAULT_MODEL = "GPT-2 (124M)"
         print("⚠️ LocalLLM not available, falling back to TinyLLM")
 
 # Rest of your code continues... 
