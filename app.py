@@ -375,22 +375,16 @@ with st.sidebar:
             st.session_state.total_chunks = 0
             st.rerun()
     
-    # Model info - NOW INSIDE THE SIDEBAR (moved here)
-    if hasattr(st.session_state.llm, 'model_name'):
-        with st.expander("Model Info", expanded=False):
-            if IN_STREAMLIT_CLOUD:
-                # Get the actual model name from the instance
-                actual_model = "GPT-2 (124M)"  # Default
-                if hasattr(st.session_state.llm, 'model_name'):
-                    # Try to get friendly name from available_models
-                    for name, model_id in st.session_state.llm.available_models.items():
-                        if model_id == st.session_state.llm.model_name:
-                            actual_model = name
-                            break
-                st.info(f"**Model:** Cloud ({actual_model})")
-            else:
-                st.info(f"**Model:** Local ({st.session_state.llm.model_name})") 
-
+# Model info - INSIDE THE SIDEBAR
+if hasattr(st.session_state.llm, 'model_name'):
+    with st.expander("Model Info", expanded=False):
+        if IN_STREAMLIT_CLOUD:
+            # For cloud, just show GPT-2 (simpler)
+            st.info(f"**Model:** Cloud (GPT-2 124M)")
+        else:
+            # For local, show the Ollama model name
+            st.info(f"**Model:** Local ({st.session_state.llm.model_name})") 
+            
 # Main content area
 if not st.session_state.processed:
     # Welcome screen - Step cards directly below header
