@@ -6,7 +6,8 @@ langchain-community==0.0.10
 # Embeddings - sentence-transformers ONLY
 sentence-transformers==2.2.2
 faiss-cpu==1.7.4
-huggingface-hub==0.20.3  # ← ADD THIS LINE (missing dependency) 
+# huggingface-hub==0.20.3  # ← ADD THIS LINE (missing dependency) 
+huggingface-hub==0.16.4  # ← CHANGED - older version that has cached_download 
 
 # PDF Processing
 pypdf==4.1.0
