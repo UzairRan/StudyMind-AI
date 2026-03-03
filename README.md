@@ -40,13 +40,29 @@
 flowchart TB
     A[PDF Upload]:::node --> B[Text Extraction]:::node
     B --> C[Chunking]:::node
-    C --> D[Embeddings<br>Sentence-Transformers]:::node
-    D --> E[FAISS Index]:::node
-    E --> F[Retriever]:::node
-    F --> G[Local / Cloud Model]:::node
-    G --> H[Answer to User]:::node
+    C --> D{Cloud or Local?}:::decision
+    
+    D -->|Local| E1[Embeddings<br>all-MiniLM-L6-v2<br>sentence-transformers]:::local
+    D -->|Cloud| E2[Embeddings<br>BAAI/bge-small-en-v1.5<br>fastembed]:::cloud
+    
+    E1 --> F[FAISS Vector DB]:::node
+    E2 --> F
+    
+    F --> G[Retriever<br>Semantic Search]:::node
+    G --> H{Cloud or Local?}:::decision
+    
+    H -->|Local| I1[Local LLM<br>llama3.2:3b<br>via Ollama]:::local
+    H -->|Cloud| I2[Cloud LLM<br>GPT-2<br>HuggingFace]:::cloud
+    
+    I1 --> J[Generated Answer]:::node
+    I2 --> J
+    
+    J --> K[Display to User<br>with Sources]:::node
 
-    classDef node fill:#e8f1ff,stroke:#000,stroke-width:2px,color:#000,font-size:18px,padding:18px;
+    classDef node fill:#e8f1ff,stroke:#000,stroke-width:2px,color:#000,font-size:18px,padding:18px
+    classDef decision fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000,font-size:18px,padding:18px
+    classDef local fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000,font-size:18px,padding:18px
+    classDef cloud fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#000,font-size:18px,padding:18px 
 ```
 
 ----------------------------------------------------
@@ -282,6 +298,7 @@ flowchart TD
 
 ---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
+
 
 
 
