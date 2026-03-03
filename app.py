@@ -4,6 +4,7 @@ Complete RAG system with local LLM support and cloud fallback
 """
 
 # MUST BE FIRST - Page config before any other Streamlit commands
+# MUST BE FIRST - Page config before any other Streamlit commands
 import streamlit as st
 st.set_page_config(
     page_title="StudyMind AI",
@@ -49,8 +50,10 @@ from modules.document_processor import DocumentProcessor
 # Conditional import for embeddings (cloud vs local)
 if IN_STREAMLIT_CLOUD:
     from modules.embeddings_light import EmbeddingManagerLight as EmbeddingManager
+    print("✅ Using lightweight fastembed for cloud")
 else:
     from modules.embeddings import EmbeddingManager
+    print("✅ Using sentence-transformers for local")
 
 from modules.retriever import Retriever
 from modules.quiz_generator import QuizGenerator
@@ -59,17 +62,19 @@ from modules.quiz_generator import QuizGenerator
 if IN_STREAMLIT_CLOUD:
     from modules.tiny_llm import TinyLLM as LLM
     DEFAULT_MODEL = "Phi-1.5 (1.3B)"
-    # Force TinyLLM even if Ollama is imported
     os.environ["USE_CLOUD_MODE"] = "true"
+    print("✅ Using TinyLLM (Phi-1.5) for cloud")
 else:
     try:
         from modules.local_llm import LocalLLM as LLM
         DEFAULT_MODEL = "llama3.2:3b"
+        print("✅ Using LocalLLM (Llama 3.2) for local")
     except ImportError:
         from modules.tiny_llm import TinyLLM as LLM
         DEFAULT_MODEL = "Phi-1.5 (1.3B)"
+        print("⚠️ LocalLLM not available, falling back to TinyLLM")
 
-# Rest of your code continues...  
+# Rest of your code continues... 
 
 # Custom CSS with improved colors and layout
 st.markdown("""
