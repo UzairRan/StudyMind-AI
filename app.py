@@ -79,7 +79,7 @@ else:
 # Custom CSS with improved colors and layout
 st.markdown("""
 <style>
-    /* Main container */
+    /* Main container */ 
     .main {
         padding: 0rem 1rem;
     }
@@ -275,11 +275,12 @@ with header_col2:
 
 # No separator line - removed completely
 
+
 # Sidebar
 with st.sidebar:
     # Mode badge with model info
     if IN_STREAMLIT_CLOUD:
-        st.markdown('<div class="mode-badge">☁️ Cloud Mode  (GPT-2)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="mode-badge">☁️ Cloud Mode (GPT-2)</div>', unsafe_allow_html=True)
     else:
         st.markdown('<div class="mode-badge">💻 Local Mode (Llama 3.2)</div>', unsafe_allow_html=True)
     
@@ -375,23 +376,22 @@ with st.sidebar:
             st.session_state.total_chunks = 0
             st.rerun()
     
+    # Model info - NOW INSIDE THE SIDEBAR (moved here)
+    if hasattr(st.session_state.llm, 'model_name'):
+        with st.expander("Model Info", expanded=False):
+            if IN_STREAMLIT_CLOUD:
+                # Get the actual model name from the instance
+                actual_model = "GPT-2 (124M)"  # Default
+                if hasattr(st.session_state.llm, 'model_name'):
+                    # Try to get friendly name from available_models
+                    for name, model_id in st.session_state.llm.available_models.items():
+                        if model_id == st.session_state.llm.model_name:
+                            actual_model = name
+                            break
+                st.info(f"**Model:** Cloud ({actual_model})")
+            else:
+                st.info(f"**Model:** Local ({st.session_state.llm.model_name})") 
 
-# Model info
-# Model info
-if hasattr(st.session_state.llm, 'model_name'):
-    with st.expander("Model Info", expanded=False):
-        if IN_STREAMLIT_CLOUD:
-            # Get the actual model name from the instance
-            actual_model = "GPT-2 (124M)"  # Default
-            if hasattr(st.session_state.llm, 'model_name'):
-                # Try to get friendly name from available_models
-                for name, model_id in st.session_state.llm.available_models.items():
-                    if model_id == st.session_state.llm.model_name:
-                        actual_model = name
-                        break
-            st.info(f"**Model:** Cloud ({actual_model})")
-        else:
-            st.info(f"**Model:** Local ({st.session_state.llm.model_name})") 
 # Main content area
 if not st.session_state.processed:
     # Welcome screen - Step cards directly below header
