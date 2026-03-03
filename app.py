@@ -21,14 +21,8 @@ import pandas as pd
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# Import modules
-from modules.document_processor import DocumentProcessor
-from modules.embeddings import EmbeddingManager
-from modules.retriever import Retriever
-from modules.quiz_generator import QuizGenerator
-
 # ============================================================================
-# ENVIRONMENT DETECTION - IMPROVED FOR STREAMLIT CLOUD
+# DEFINE ENVIRONMENT DETECTION FIRST (BEFORE MODULE IMPORTS)
 # ============================================================================
 import sys
 IN_STREAMLIT_CLOUD = False
@@ -47,6 +41,20 @@ elif "REPLIT" in os.environ:
 elif os.getenv("STREAMLIT_SERVER_PORT"):
     IN_STREAMLIT_CLOUD = True
 
+# ============================================================================
+# NOW IMPORT MODULES (after environment detection)
+# ============================================================================
+from modules.document_processor import DocumentProcessor
+
+# Conditional import for embeddings (cloud vs local)
+if IN_STREAMLIT_CLOUD:
+    from modules.embeddings_light import EmbeddingManagerLight as EmbeddingManager
+else:
+    from modules.embeddings import EmbeddingManager
+
+from modules.retriever import Retriever
+from modules.quiz_generator import QuizGenerator
+
 # Import appropriate LLM based on environment
 if IN_STREAMLIT_CLOUD:
     from modules.tiny_llm import TinyLLM as LLM
@@ -60,6 +68,8 @@ else:
     except ImportError:
         from modules.tiny_llm import TinyLLM as LLM
         DEFAULT_MODEL = "Phi-1.5 (1.3B)"
+
+# Rest of your code continues...  
 
 # Custom CSS with improved colors and layout
 st.markdown("""
